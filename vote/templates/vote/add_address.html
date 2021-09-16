@@ -1,0 +1,43 @@
+{% extends "vote/layout/basic.html" %}
+
+{% block content %}
+
+    <h2>Address</h2>
+        <hr>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+            <table class="table">
+                {{ choices.management_form }}
+
+                {% for form in choices.forms %}
+                    {% if forloop.first %}
+                        <thead>
+                        <tr>
+                            {% for field in form.visible_fields %}
+                                <th>{{ field.label|capfirst }}</th>
+                            {% endfor %}
+                        </tr>
+                        </thead>
+                    {% endif %}
+                    <tr class="{% cycle row1 row2 %} formset_row">
+                        {% for field in form.visible_fields %}
+                            <td>
+                                {% if forloop.first %}
+                                    {% for hidden in form.hidden_fields %}
+                                        {{ hidden }}
+                                    {% endfor %}
+                                {% endif %}
+                                {{ field.errors.as_ul }}
+                                {{ field }}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+        {{ address_form }}
+        {{ choice_form }}
+        <input type="submit" value="Add">
+    </form>
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "vote/layout/basic.html" %}
+
+{%  block content %}
+
+{% if all_address_list %}
+
+        {% for address in all_address_list %}
+            <a href="{% url 'vote' address.id %}">{{ address.country }}</a>
+            <a href="{% url 'vote' address.id %}">{{ address.city }}</a>
+            <a href="{% url 'vote' address.id %}">{{ address.street }}</a>
+            <a href="{% url 'vote' address.id %}">{{ address.house }}</a>
+            Residents {{ address.residents }}
+            {{ address.question_text }}
+            {% for choice in address.choice_set.all %}
+                {{ choice.choice_text }}
+                {{ choice.votes }}
+            {% endfor %}
+        <br>
+            {% endfor %}
+
+    {% else %}
+        <p>No polls are available.</p>
+    {% endif %}
+{% endblock %}
+
+
