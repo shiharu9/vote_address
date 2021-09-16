@@ -1,0 +1,32 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'vote/style.css' %}">
+</head>
+<body>
+
+<nav role='navigation'>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="{% url 'add' %}">Add address</a>
+{#      <ul>#}
+{#        <li><a href=""></a></li>#}
+{#        <li><a href=""></a></li>#}
+{#      </ul>#}
+    </li>
+    <li><a href="/admin">Sign In</a></li>
+  </ul>
+</nav>
+
+<div style="padding:20px;margin-top:100px; height:1500px;">
+{% block content %}
+
+{% endblock %}
+</div>
+
+</body>
+</html>
